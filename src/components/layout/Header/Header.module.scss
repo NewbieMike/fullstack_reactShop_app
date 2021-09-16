@@ -1,4 +1,22 @@
 @import '../../../styles/settings.scss';
 
-// .root {
-// }
+.root {
+    position: fixed;
+    top: 0;
+    background-color: $white;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    z-index: 1000;
+}
+.links_container {
+    display: flex;
+    justify-content: space-between;
+
+    a {
+        padding: 10px 20px;
+    }
+}

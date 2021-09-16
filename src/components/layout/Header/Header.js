@@ -8,10 +8,20 @@ import clsx from 'clsx';
 
 import styles from './Header.module.scss';
 
-const Component = ({className, children}) => (
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+
+const Component = ({className}) => (
   <div className={clsx(className, styles.root)}>
     <h2>Header</h2>
-    {children}
+    <div className={styles.links_container}>
+      <a href='/'>Link</a>
+      <a href='/'>Link</a>
+      <a href='/'>Link</a>
+      <a href='/'>Link</a>
+    </div>
+    <div className={styles.cart}>
+      <ShoppingCartIcon />
+    </div>
   </div>
 );
 

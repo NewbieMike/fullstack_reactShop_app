@@ -1,6 +1,6 @@
 /* selectors */
 export const getAll = ({items}) => items.data;
-
+export const getOne = ({items}, id) => items.data.find(item => item.id.toString() === id);
 /* action name creator */
 const reducerName = 'items';
 const createActionName = name => `app/${reducerName}/${name}`;
@@ -9,11 +9,13 @@ const createActionName = name => `app/${reducerName}/${name}`;
 const FETCH_START = createActionName('FETCH_START');
 const FETCH_SUCCESS = createActionName('FETCH_SUCCESS');
 const FETCH_ERROR = createActionName('FETCH_ERROR');
+const FETCH_ONE_ITEM = createActionName('FETCH_ONE_ITEM');
 
 /* action creators */
 export const fetchStarted = payload => ({ payload, type: FETCH_START });
 export const fetchSuccess = payload => ({ payload, type: FETCH_SUCCESS });
 export const fetchError = payload => ({ payload, type: FETCH_ERROR });
+export const fetchOneItem = (payload) => ({ payload, type: FETCH_ONE_ITEM });
 
 /* thunk creators */
 
@@ -46,6 +48,16 @@ export const reducer = (statePart = [], action = {}) => {
           active: false,
           error: action.payload,
         },
+      };
+    }
+    case FETCH_ONE_ITEM: {
+      return {
+        ...statePart,
+        loading: {
+          active: false,
+          error: false,
+        },
+        oneItem: action.payload,
       };
     }
     default:

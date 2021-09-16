@@ -6,10 +6,13 @@ import clsx from 'clsx';
 // import { connect } from 'react-redux';
 // import { reduxSelector, reduxActionCreator } from '../../../redux/exampleRedux.js';
 
+import {HeaderComponent} from './../Header/Header.js';
+
 import styles from './MainLayout.module.scss';
 
 const Component = ({className, children}) => (
   <div className={clsx(className, styles.root)}>
+    <HeaderComponent />
     <h2>MainLayout</h2>
     {children}
   </div>
