@@ -9,23 +9,24 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 
 import { getAll } from '../../../redux/itemsRedux';
 import { connect } from 'react-redux';
 
 import styles from './Homepage.module.scss';
 
-
+import About from './About/About.js';
 
 
 const Component = ({ className, children, items }) => (
-  <div className={clsx(className, styles.root)}>
+  <div className={clsx(className, styles.root)} id='Home'>
     <div className={styles.main_background}>
       <h1>romountains</h1>
       <h2>with love to mountains</h2>
     </div>
-    <div className={styles.slogan}>Magic moments required best quility </div>
-    <div className={styles.products_container}>
+    <div className={styles.slogan} >Magic moments required best quility </div>
+    <div className={styles.products_container} id='Shop'>
       {items.map((item) => (
         <Card className={styles.card} key={item.id}>
           <CardActionArea href={`/items/${item.id}`}>
@@ -48,7 +49,7 @@ const Component = ({ className, children, items }) => (
           </CardActionArea>
           <CardActions className={styles.card_btns}>
             <Button size="small" color="primary">
-              Add to cart
+              Add to cart <ShoppingCartIcon />
             </Button>
             <Button size="small" color="primary">
               Price: {item.price}
@@ -57,6 +58,7 @@ const Component = ({ className, children, items }) => (
         </Card>
       ))}
     </div>
+    <About />
   </div>
 );
 

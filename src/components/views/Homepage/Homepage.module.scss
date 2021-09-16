@@ -4,7 +4,6 @@ html, body {
     font-family: $paragraph;
 }
 .root {
-
     .main_background {
         background-image: url('https://images.pexels.com/photos/618833/pexels-photo-618833.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940');
         background-position: center;
@@ -41,7 +40,7 @@ html, body {
     .products_container {
         display: flex;
         flex-wrap: wrap;
-
+        padding-top: 100px;
         .card {
             flex: 1;
             min-width: 300px;

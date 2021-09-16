@@ -1,27 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { HashLink } from 'react-router-hash-link';
+
 import clsx from 'clsx';
 
 // import { connect } from 'react-redux';
 // import { reduxSelector, reduxActionCreator } from '../../../redux/exampleRedux.js';
 
-import styles from './Header.module.scss';
+import styles from './Cart.module.scss';
 
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-
-const Component = ({className}) => (
+const Component = ({className, children}) => (
   <div className={clsx(className, styles.root)}>
-    <h2>Header</h2>
-    <div className={styles.links_container}>
-      <HashLink to='/#Home' smooth>Link</HashLink>
-      <HashLink to='/#Shop' smooth>Link</HashLink>
-      <HashLink to='/#About' smooth>Link</HashLink>
-      {/* <ScrollLink to='/'>Link</ScrollLink> */}
-    </div>
-    <div className={styles.cart}>
-      <ShoppingCartIcon />
-    </div>
+    <h2>Cart</h2>
+    {children}
   </div>
 );
 
@@ -41,7 +31,7 @@ Component.propTypes = {
 // const Container = connect(mapStateToProps, mapDispatchToProps)(Component);
 
 export {
-  Component as Header,
-  // Container as Header,
-  Component as HeaderComponent,
+  Component as Cart,
+  // Container as Cart,
+  Component as CartComponent,
 };
