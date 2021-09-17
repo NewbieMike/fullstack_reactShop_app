@@ -1,5 +1,18 @@
 @import '../../../styles/settings.scss';
 
+a:hover {
+    background-color: $orange;
+    color: $white;
+}
+a {
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: 0.4s ease-in;
+    border-radius: 6px;
+    margin: 6px;
+    text-decoration: none;
+    color: $black;
+}
 .root {
     position: fixed;
     top: 0;
@@ -16,16 +29,15 @@
     display: flex;
     justify-content: space-between;
 
+    
+    
+    
+}
+.cart {
     a {
-        padding: 10px 20px;
-        cursor: pointer;
-        transition: 0.4s ease-in;
-        border-radius: 6px;
-        margin: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         text-decoration: none;
-    }
-    a:hover {
-        background-color: $orange;
-        color: $white;
     }
 }

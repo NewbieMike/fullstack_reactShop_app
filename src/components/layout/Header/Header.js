@@ -14,13 +14,13 @@ const Component = ({className}) => (
   <div className={clsx(className, styles.root)}>
     <h2>Header</h2>
     <div className={styles.links_container}>
-      <HashLink to='/#Home' smooth>Link</HashLink>
-      <HashLink to='/#Shop' smooth>Link</HashLink>
-      <HashLink to='/#About' smooth>Link</HashLink>
+      <HashLink to='/#Home' smooth>Home</HashLink>
+      <HashLink to='/#Shop' smooth>Shop</HashLink>
+      <HashLink to='/#About' smooth>About</HashLink>
       {/* <ScrollLink to='/'>Link</ScrollLink> */}
     </div>
     <div className={styles.cart}>
-      <ShoppingCartIcon />
+      <a href='/cart'>Cart <ShoppingCartIcon /></a>
     </div>
   </div>
 );

@@ -12,6 +12,7 @@ import { Homepage } from './components/views/Homepage/Homepage';
 
 import { NotFound } from './components/views/NotFound/NotFound';
 import { Item } from './components/views/Item/Item';
+import { Cart } from './components/views/Cart/Cart';
 
 const theme = createTheme({
   palette: {
@@ -29,7 +30,7 @@ const App = () => (
             <Switch>
               <Route exact path='/' component={Homepage} />
               <Route exact path='/items/:id' component={Item} />
-              {/* <Route exact path='/cart' component={''} /> */}
+              <Route exact path='/cart' component={Cart} />
               <Route path='*' component={NotFound} />
             </Switch>
           </MainLayout>
