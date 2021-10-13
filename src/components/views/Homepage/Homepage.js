@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
 
 import clsx from 'clsx';
@@ -11,7 +11,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 
-import { getAll } from '../../../redux/itemsRedux';
+import { getAll, fetchItems } from '../../../redux/itemsRedux';
 import { connect } from 'react-redux';
 
 import styles from './Homepage.module.scss';
@@ -19,67 +19,72 @@ import styles from './Homepage.module.scss';
 import About from './About/About.js';
 
 
-const Component = ({ className, children, items }) => (
-  <div className={clsx(className, styles.root)} id='Home'>
-    <div className={styles.main_background}>
-      <h1>romountains</h1>
-      <h2>with love to mountains</h2>
+const Component = ({ className, items, fetchAllItems }) => {
+  useEffect(() => {
+    fetchAllItems();
+  }, []);
+  return (
+    <div className={clsx(className, styles.root)} id='Home'>
+      <div className={styles.main_background}>
+        <h1>romountains</h1>
+        <h2>with love to mountains</h2>
+      </div>
+      <div className={styles.slogan} >Magic moments required best quility </div>
+      <div className={styles.products_container} id='Shop'>
+        {items.map((item) => (
+          <Card className={styles.card} key={item._id}>
+            <CardActionArea href={`/items/${item._id}`}>
+              <CardMedia
+                component="img"
+                alt="Contemplative Reptile"
+                height="140"
+                image={item.image}
+                title="Contemplative Reptile"
+                className={styles.card_img}
+              />
+              <CardContent>
+                <Typography gutterBottom variant="h5" component="h2">
+                  {item.title}
+                </Typography>
+                <Typography variant="body2" color="textSecondary" component="p">
+                  {item.content}
+                </Typography>
+              </CardContent>
+            </CardActionArea>
+            <CardActions className={styles.card_btns}>
+              <Button size="small" color="primary">
+                Add to cart <ShoppingCartIcon />
+              </Button>
+              <Button size="small" color="primary">
+                Price: {item.price}
+              </Button>
+            </CardActions>
+          </Card>
+        ))}
+      </div>
+      <About />
     </div>
-    <div className={styles.slogan} >Magic moments required best quility </div>
-    <div className={styles.products_container} id='Shop'>
-      {items.map((item) => (
-        <Card className={styles.card} key={item.id}>
-          <CardActionArea href={`/items/${item.id}`}>
-            <CardMedia
-              component="img"
-              alt="Contemplative Reptile"
-              height="140"
-              image={item.image}
-              title="Contemplative Reptile"
-              className={styles.card_img}
-            />
-            <CardContent>
-              <Typography gutterBottom variant="h5" component="h2">
-                {item.title}
-              </Typography>
-              <Typography variant="body2" color="textSecondary" component="p">
-                {item.content}
-              </Typography>
-            </CardContent>
-          </CardActionArea>
-          <CardActions className={styles.card_btns}>
-            <Button size="small" color="primary">
-              Add to cart <ShoppingCartIcon />
-            </Button>
-            <Button size="small" color="primary">
-              Price: {item.price}
-            </Button>
-          </CardActions>
-        </Card>
-      ))}
-    </div>
-    <About />
-  </div>
-);
+  );
+};
 
 Component.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
   items: PropTypes.node,
+  fetchAllItems: PropTypes.node,
 };
 
-const mapStateToProps = (state, props) => ({
+const mapStateToProps = (state) => ({
   items: getAll(state),
 });
 
-// const mapDispatchToProps = dispatch => ({
-//   someAction: arg => dispatch(reduxActionCreator(arg)),
-// });
+const mapDispatchToProps = dispatch => ({
+  fetchAllItems: () => dispatch(fetchItems()),
+});
 
-const Container = connect(mapStateToProps)(Component);
+const Container = connect(mapStateToProps, mapDispatchToProps)(Component);
 
 export {
-  // Component as Homepage,
   Container as Homepage,
   Component as HomepageComponent,
 };

@@ -9,8 +9,9 @@ import clsx from 'clsx';
 import styles from './Header.module.scss';
 
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import { connect } from 'react-redux';
 
-const Component = ({className}) => (
+const Component = ({className, cart}) => (
   <div className={clsx(className, styles.root)}>
     <h2>Header</h2>
     <div className={styles.links_container}>
@@ -20,7 +21,7 @@ const Component = ({className}) => (
       {/* <ScrollLink to='/'>Link</ScrollLink> */}
     </div>
     <div className={styles.cart}>
-      <a href='/cart'>Cart <ShoppingCartIcon /></a>
+      <a href='/cart'>Cart <ShoppingCartIcon /> {cart}</a>
     </div>
   </div>
 );
@@ -28,20 +29,21 @@ const Component = ({className}) => (
 Component.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
+  cart: PropTypes.node,
 };
 
-// const mapStateToProps = state => ({
-//   someProp: reduxSelector(state),
-// });
+const mapStateToProps = state => ({
+
+});
 
 // const mapDispatchToProps = dispatch => ({
 //   someAction: arg => dispatch(reduxActionCreator(arg)),
 // });
 
-// const Container = connect(mapStateToProps, mapDispatchToProps)(Component);
+const Container = connect(mapStateToProps)(Component);
 
 export {
-  Component as Header,
-  // Container as Header,
+  // Component as Header,
+  Container as Header,
   Component as HeaderComponent,
 };
