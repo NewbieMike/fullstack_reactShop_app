@@ -1,67 +1,64 @@
-import axios from 'axios';
+/* selectors */
+export const getCartItems = ({cart}) => cart.items;
 
+/* action name creator */
+const reducerName = 'cart';
+const createActionName = name => `app/${reducerName}/${name}`;
 
-//actions
-export const ADD_TO_CART = 'ADD_TO_CART';
-export const REMOVE_FROM_CART = 'REMOVE_FROM_CART';
-export const CART_RESET = 'CART_RESET';
+/* action types */
+const ADD_TO_CART = createActionName('ADD_TO_CART');
+const REMOVE_ITEM = createActionName('REMOVE_ITEM');
+const UPDATE_ITEM_QNTY = createActionName('UPDATE_ITEM_QNTY');
+const UPDATE_ITEM_NOTE = createActionName('UPDATE_ITEM_NOTE');
 
-export const addToCart = (id, qty) => async (dispatch, getState) => {
-  const { data } = await axios.get(`http://localhost:8000/api/products/${id}`);
+/* action creators */
+export const addToCart = payload => ({ payload, type: ADD_TO_CART });
+export const removeItem = (id, size) => ({ payload: {id, size}, type: REMOVE_ITEM });
+export const updateItemQnty = (itemId, qnty) => ({ payload: {id: itemId, qnty}, type: UPDATE_ITEM_QNTY });
+export const updateItemNote = (itemId, note) => ({ payload: {id: itemId, note}, type: UPDATE_ITEM_NOTE });
 
-  dispatch({
-    type: ADD_TO_CART,
-    payload: {
-      product: data._id,
-      title: data.name,
-      image: data.imageUrl,
-      price: data.price,
-    },
-  });
+/* thunk creators */
 
-  localStorage.setItem('cart', JSON.stringify(getState().cart.cartItems));
-};
-
-export const removeFromCart = (id) => (dispatch, getState) => {
-  dispatch({
-    type: REMOVE_FROM_CART,
-    payload: id,
-  });
-
-  localStorage.setItem('cart', JSON.stringify(getState().cart.cartItems));
-};
-
-const CART_INITIAL_STATE = {
-  cartItems: [],
-};
-
-export const cartReducer = (state = CART_INITIAL_STATE, action) => {
+/* reducer */
+export const reducer = (statePart = [], action = {}) => {
   switch (action.type) {
-    case ADD_TO_CART:
-      // eslint-disable-next-line no-case-declarations
-      const item = action.payload;
-      // eslint-disable-next-line no-case-declarations
-      const existItem = state.cartItems.find((x) => x.product === item.product);
-
-      if (existItem) {
-        return {
-          ...state,
-          cartItems: state.cartItems.map((x) =>
-            x.product === existItem.product ? item : x
-          ),
-        };
-      } else {
-        return {
-          ...state,
-          cartItems: [...state.cartItems, item],
-        };
-      }
-    case REMOVE_FROM_CART:
+    case ADD_TO_CART: {
       return {
-        ...state,
-        cartItems: state.cartItems.filter((x) => x.product !== action.payload),
+        ...statePart,
+        items: [...statePart.items, action.payload],
       };
+    }
+    case UPDATE_ITEM_QNTY: {
+      return {
+        ...statePart,
+        items: statePart.items.map(item =>
+          item.id === action.payload.id
+            ? {...item, quantity: + action.payload.qnty}
+            : item
+        ),
+      };
+    }
+    case UPDATE_ITEM_NOTE: {
+      return {
+        ...statePart,
+        items: statePart.items.map(item =>
+          item.id === action.payload.id
+            ? {...item, note: action.payload.note}
+            : item
+        ),
+      };
+    }
+    case REMOVE_ITEM: {
+      const newArray = [...statePart.items];
+      const itemToRemove = newArray.filter(item => item.id === action.payload.id && item.size === action.payload.size)[0];
+      const index = newArray.indexOf(itemToRemove);
+      newArray.splice(index, 1);
+      return {
+        ...statePart,
+        items: newArray,
+      };
+    }
     default:
-      return state;
+      return statePart;
   }
 };
