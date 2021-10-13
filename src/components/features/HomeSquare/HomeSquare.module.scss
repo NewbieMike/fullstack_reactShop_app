@@ -1,0 +1,8 @@
+@import '../../../styles/settings.scss';
+
+.box {
+    height: 300px;
+    width: 300px;
+    background-color: $orange;
+    position: absolute;
+}

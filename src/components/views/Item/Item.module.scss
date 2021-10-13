@@ -18,6 +18,9 @@
             height: 600px;
             width: 600px;
             margin: 10px;
+            object-fit: cover;
+            background-position: center;
+            background-size: cover;
         }
         p {
             line-height: 39px;

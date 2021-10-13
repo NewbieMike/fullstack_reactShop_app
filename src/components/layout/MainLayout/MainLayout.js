@@ -9,12 +9,13 @@ import clsx from 'clsx';
 import {Header} from './../Header/Header.js';
 
 import styles from './MainLayout.module.scss';
+import { Footer } from '../Footer/Footer.js';
 
 const Component = ({className, children}) => (
   <div className={clsx(className, styles.root)}>
     <Header />
-    <h2>MainLayout</h2>
     {children}
+    <Footer />
   </div>
 );
 

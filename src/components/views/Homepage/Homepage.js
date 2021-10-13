@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
-
+import { HashLink } from 'react-router-hash-link';
 import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -19,6 +19,7 @@ import styles from './Homepage.module.scss';
 import About from './About/About.js';
 
 
+
 const Component = ({ className, items, fetchAllItems }) => {
   useEffect(() => {
     fetchAllItems();
@@ -28,6 +29,15 @@ const Component = ({ className, items, fetchAllItems }) => {
       <div className={styles.main_background}>
         <h1>romountains</h1>
         <h2>with love to mountains</h2>
+        <HashLink className={clsx(className, styles.box)} to='/#Shop'>
+          <h4>Shop</h4>
+        </HashLink>
+        <HashLink className={clsx(className, styles.box2)} to='/#Shop'>
+          <h4>About</h4>
+        </HashLink>
+        <HashLink className={clsx(className, styles.box3)} to='/#Shop'>
+          <h4>Contact</h4>
+        </HashLink>
       </div>
       <div className={styles.slogan} >Magic moments required best quility </div>
       <div className={styles.products_container} id='Shop'>

@@ -15,16 +15,17 @@ html, body {
         h1, 
         h2 {
             position: absolute;
-            top: 30%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            top: 20%;
+            left: 5%;
+            // transform: translate(-50%, -50%);
             text-transform: uppercase;
             font-size: 50px;
             font-family: $title;
             color: $white;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.4);
         }
         h2 {
-            top: 45%;
+            top: 30%;
             text-align: center;
             font-size: 30px;
         }
@@ -45,6 +46,10 @@ html, body {
             flex: 1;
             min-width: 300px;
             margin: 5px 30px;
+
+            a:hover {
+                background-color: white  ;
+            }
             h2 {
                 text-align: center;
                 width: 100%;
@@ -56,5 +61,47 @@ html, body {
                 justify-content: space-around;
             }
         }
+        .card:hover {
+            box-shadow: 15px 15px 5px rgba(0,0,0,0.1);
+        }
     }
+}
+.box2,
+.box3,
+.box {
+    height: 300px;
+    width: 300px;
+    background-color: $orange;
+    position: absolute;
+    bottom: 0;
+    left: 300px;
+    margin: 0;
+    border-radius: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    h4 {
+        color: $white;
+        font-size: 38px;
+        font-family: $title;
+        text-transform: uppercase;
+    }
+}
+.box2:hover,
+.box3:hover,
+.box:hover {
+    background-color: transparent;
+    border: 1px solid $orange;
+    h4 {
+        color: $orange;
+    }
+}
+
+.box2 {
+    left: 602px;
+}
+.box3 {
+    bottom: 302px;
+    left: 904px;
 }
