@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { HashLink } from 'react-router-hash-link';
 import clsx from 'clsx';
@@ -17,25 +17,26 @@ import { connect } from 'react-redux';
 import styles from './Homepage.module.scss';
 
 import About from './About/About.js';
+import Contact from './Contact/Contact';
 
 
 
 const Component = ({ className, items, fetchAllItems }) => {
-  useEffect(() => {
-    fetchAllItems();
-  }, []);
+  // useEffect(() => {
+  //   fetchAllItems();
+  // }, []);
   return (
     <div className={clsx(className, styles.root)} id='Home'>
       <div className={styles.main_background}>
         <h1>romountains</h1>
         <h2>with love to mountains</h2>
-        <HashLink className={clsx(className, styles.box)} to='/#Shop'>
+        <HashLink className={clsx(className, styles.box)} to='/#Shop' smooth>
           <h4>Shop</h4>
         </HashLink>
-        <HashLink className={clsx(className, styles.box2)} to='/#Shop'>
+        <HashLink className={clsx(className, styles.box2)} to='/#About' smooth>
           <h4>About</h4>
         </HashLink>
-        <HashLink className={clsx(className, styles.box3)} to='/#Shop'>
+        <HashLink className={clsx(className, styles.box3)} to='/#Contact' smooth>
           <h4>Contact</h4>
         </HashLink>
       </div>
@@ -73,6 +74,7 @@ const Component = ({ className, items, fetchAllItems }) => {
         ))}
       </div>
       <About />
+      <Contact />
     </div>
   );
 };
